@@ -22,9 +22,11 @@ class StdinWorker {
 	}
 
 	public void DoPipe() {
-		while ( (line = Console.ReadLine()) != null ) {
-			lines.Add( line ) ;
-		}	
+		if ( Console.IsInputRedirected ) {
+			while ( (line = Console.ReadLine()) != null ) {
+				lines.Add( line ) ;
+			}	
+		}
 	}
 }
 
