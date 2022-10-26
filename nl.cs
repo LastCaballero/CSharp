@@ -1,5 +1,6 @@
 using System ;
 using System.Collections.Generic ;
+using System.IO ;
 
 class Lines {
 	private static List<string> _lines = new List<string>() ;
@@ -27,6 +28,21 @@ class StdinWorker {
 	}
 }
 
+class FileExtractor {
+	StreamReader for_file ;
+	List<string> lines ;
+	string line ;
+	public FileExtractor ( string filename ) {
+		lines = Lines.list ;
+		for_file = new StreamReader(filename) ;
+	}
+	public void ReadLines() {
+		while ( ( line = for_file.ReadLine() ) != null ) {
+			lines.Add( line ) ;
+		} 
+	}
+}
+
 class OutPutter {
 	List<string> lines ;
 	public OutPutter() {
@@ -41,8 +57,13 @@ class OutPutter {
 }
 
 class Start {
-	static void Main() {
+	static void Main( string[] args ) {
 		new StdinWorker().DoPipe() ;
+		foreach ( string arg in args ) {
+			if ( File.Exists(arg) ) { 
+				new FileExtractor(arg).ReadLines() ;
+			}
+		}
 		new OutPutter().doOutput() ;
 	}
 }
