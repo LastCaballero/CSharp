@@ -2,7 +2,6 @@
 using System.Net ;
 
 class FileReceiver{
-    
     StreamWriter to_file ;
     TcpListener me ;
     IPAddress my_ip = IPAddress.Parse("127.0.0.1");
@@ -31,9 +30,7 @@ class FileReceiver{
     }
 }
 
-
 class Start {
-    
     static string? filename ;
     static int port ;
     static public void Main(string[] args){
