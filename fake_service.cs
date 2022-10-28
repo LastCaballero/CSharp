@@ -5,7 +5,7 @@ using System ;
 
 class FakeService: TcpListener {
 	TcpClient Connection ;
-	
+	static int ConnectionCount = 0 ;	
 	public FakeService ( int port ): base( IPAddress.Parse("127.0.0.1") , port) {}
 	
 	public void StartWaiting() {
@@ -15,8 +15,8 @@ class FakeService: TcpListener {
 	public void ClientLookUp () {
 		Connection = AcceptTcpClient() ;
 		Inform( ref Connection ) ;
+		Connection.Close() ;
 		Stop() ;
-		Connection.Client.Disconnect( true ) ;
 		Restart() ;
 	}
 	public void Restart() {
@@ -24,15 +24,18 @@ class FakeService: TcpListener {
 		ClientLookUp() ;
 	}
 	public void Inform( ref TcpClient con ) {
-		Console.WriteLine( con ) ;
+		ConnectionCount++ ;
+		Console.WriteLine("unitl yet " + ConnectionCount + " suspicious connections" ) ;
 	}
 }
 
 
 class Start {
 	public static void Main () {
-		new Thread( new FakeService(4000).StartWaiting ).Start() ;
-		new Thread( new FakeService(4001).StartWaiting ).Start() ;
+		int[] ports = { 4000, 4001, 4002, 4003 } ;
+		foreach ( int po in ports ) {
+			new Thread( new FakeService( po ).StartWaiting ).Start() ;
+		}
 	}
 }
 
