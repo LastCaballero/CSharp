@@ -25,7 +25,7 @@ class FakeService: TcpListener {
 	}
 	public void Inform( ref TcpClient con ) {
 		ConnectionCount++ ;
-		Console.WriteLine("unitl yet " + ConnectionCount + " suspicious connections" ) ;
+		Console.WriteLine("until now " + ConnectionCount + " suspicious connections" ) ;
 	}
 }
 
