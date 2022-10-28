@@ -2,8 +2,6 @@ using System.Net ;
 using System.Net.Sockets ;
 using System.IO ;
 
-
-
 class NetcatContact {
 	TcpListener me ;
 	TcpClient netcat ;
@@ -35,7 +33,6 @@ class StreamExchange {
 	}
 
 }
-
 
 
 class Start {
