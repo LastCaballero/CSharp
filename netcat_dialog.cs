@@ -5,7 +5,7 @@ using System.IO ;
 
 class Contacter {
 	
-	public TcpClient 		NetCat 		{ get ; }
+	public TcpClient 	NetCat 		{ get ; }
 	public NetworkStream 	NCStream 	{ get ; }
 	public StreamReader 	FromNetcat 	{ get ; }
 	public StreamWriter 	ToNetcat 	{ get ; }
@@ -45,9 +45,6 @@ class Contacter {
 	}
 
 }
-
-
-
 
 
 
