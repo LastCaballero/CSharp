@@ -10,17 +10,17 @@ class Contacter
     NetworkStream NCStream ;
     StreamReader FromNetcat ;
     StreamWriter ToNetcat ;
-	Queue<string> messages ;
+    Queue<string> messages ;
     public Contacter(string host, int port)
     {
-		messages = new Queue<string>() ;
+	messages = new Queue<string>() ;
         NetCat = new TcpClient(host, port);
         NCStream = NetCat.GetStream();
         FromNetcat = new StreamReader(NCStream);
 
         ToNetcat = new StreamWriter(NCStream);
 
-		new Thread(ReadFromNetcat).Start() ;
+	new Thread(ReadFromNetcat).Start() ;
         TalkToNetcat();
 
     }
