@@ -1,4 +1,4 @@
-﻿class Sequenz
+class Sequenz
 {
     int begin, end, step = 1;
     int width;
@@ -36,25 +36,42 @@
 class Start
 {
     static int a, b, s;
-    public static void Main(string[] args)
+    public static int Main(string[] args)
     {
-        if (args.Length == 2)
+        if (args.Length < 2) {
+            Console.Error.Write("At least 2 arguments are needed for a sequenz!\n");
+            return 1 ;
+        }
+        else if (args.Length == 2)
         {
-            a = int.Parse(args[0]);
-            b = int.Parse(args[1]);
-            new Sequenz(a, b).Output();
+            try{
+                a = int.Parse(args[0]);
+                b = int.Parse(args[1]);
+                new Sequenz(a, b).Output();
+            } catch {
+                 Console.Error.Write("The Args must be numbers!\n");
+                 return 1 ;     
+            }
+            
+            
         }
         else if (args.Length == 3)
         {
-            a = int.Parse(args[0]);
-            b = int.Parse(args[1]);
-            s = int.Parse(args[2]);
+            try {
+                a = int.Parse(args[0]);
+                b = int.Parse(args[1]);
+                s = int.Parse(args[2]);
             new Sequenz(a, b, s).Output();
+            } catch {
+                Console.Error.Write("The Args must be numbers!\n");
+                return 1 ;
+            }
+            
         }
-        else
-        {
-            Console.Error.Write("We need 2 or 3 args.\n");
-            Console.Error.Write("Start, end and if you want steps.");
-        }
+        else {
+            Console.Error.Write("Something else went wrong!\n");
+            return 1 ;
+        }        
+        return 0 ;
     }
 }
