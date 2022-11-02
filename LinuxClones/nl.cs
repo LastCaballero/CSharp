@@ -13,6 +13,7 @@ class Lines {
 		get { return _lines.Capacity.ToString().Length ; }
 	}
 }
+
 class StdinWorker {
 	string line ;
 	List<string> lines ;
@@ -22,11 +23,9 @@ class StdinWorker {
 	}
 
 	public void DoPipe() {
-		if ( Console.IsInputRedirected ) {
-			while ( (line = Console.ReadLine()) != null ) {
-				lines.Add( line ) ;
-			}	
-		}
+		while ( (line = Console.ReadLine()) != null ) {
+			lines.Add( line ) ;
+		}	
 	}
 }
 
@@ -60,12 +59,19 @@ class OutPutter {
 
 class Start {
 	static void Main( string[] args ) {
-		new StdinWorker().DoPipe() ;
-		foreach ( string arg in args ) {
-			if ( File.Exists(arg) ) { 
-				new FileExtractor(arg).ReadLines() ;
+		if ( Console.IsInputRedirected ) {
+			new StdinWorker().DoPipe() ;
+		}
+		
+		if ( args.Length >= 1 ) {
+			foreach ( string arg in args ) {
+				if ( File.Exists(arg) ) { 
+					new FileExtractor(arg).ReadLines() ;
+				}
 			}
 		}
-		new OutPutter().doOutput() ;
+		if ( Lines.list.Count > 0 ) {
+			new OutPutter().doOutput() ;
+		}
 	}
 }
