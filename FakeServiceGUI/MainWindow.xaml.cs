@@ -93,6 +93,7 @@ namespace fakeservice_classes
             Main.IncreaseServiceCount() ;
         }
         public void StartCycle () {
+            TcpFake.Start() ;
             TcpFake.AcceptTcpClient() ;
             Main.IncreaseAttackCount() ;
             TcpFake.Stop() ;
