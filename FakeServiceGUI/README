@@ -1,1 +1,6 @@
 Demo purpose only - not ready
+
+1. download all files
+2. download command line tool dotnet
+3. BUILD : dotnet build
+4. RUN: dotnet run
