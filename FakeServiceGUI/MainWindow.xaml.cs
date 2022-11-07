@@ -2,21 +2,19 @@
 using System.Net.Sockets;
 using System.Net;
 using System.Threading;
+using System.Threading.Tasks ;
 using System.Collections.Generic ;
 
 
 
 namespace fakeservices
 {
-    using fakeservice_classes;
-
+    
     public partial class MainWindow : Window
     {
         int ServiceCount = 0 ;
         int AttackCount = 0 ;
-        List<Thread> threads = new List<Thread>() ;
         List<FakeService> fakes = new List<FakeService>() ;
-
         public MainWindow()
         {
 
@@ -46,14 +44,8 @@ namespace fakeservices
             int Start = 4000 ;
             int Count = (int)this.NumServices.Content ;
             int End = Start + Count ;
-            FakeService fa ;
-            Thread tr ;
-            for (int i = 4000; i < End; i++) {
-                fa = new( i, this ) ;
-                tr = new(fa.StartCycle);
-                tr.Start() ;
-                fakes.Add(fa) ;
-                threads.Add(tr) ;
+            for ( int i = Start; i < End ; i++) {
+                fakes.Add( new FakeService( i, this ) ) ;
             }
             
         }
@@ -74,34 +66,40 @@ namespace fakeservices
         }
 
     }
-}
 
-namespace fakeservice_classes
-{
-    
-    using fakeservices ;
-    
     class FakeService{
+
         IPAddress Ip = IPAddress.Parse("127.0.0.1") ;
         int port ;
-        MainWindow Main ;
-        TcpListener TcpFake { get ;} 
+        TcpListener TcpFake { get ;}
+        Task<TcpClient> ClientTask ;
+        MainWindow Main ; 
         public FakeService( int port, MainWindow main ) {
-            this.port = port ;
             Main = main ;
+            this.port = port ;        
             TcpFake = new(Ip, this.port) ;
-            Main.IncreaseServiceCount() ;
-        }
-        public void StartCycle () {
             TcpFake.Start() ;
-            TcpFake.AcceptTcpClient() ;
-            Main.IncreaseAttackCount() ;
-            TcpFake.Stop() ;
-            TcpFake.Server.Dispose() ;
-            new FakeService(port, Main) ;
+            new Thread(Accept).Start() ;        
+        }
+        public void Accept () {
+            ClientTask = TcpFake.AcceptTcpClientAsync();
+            Main.IncreaseServiceCount() ;
+            new Thread(TestForResult).Start() ;
+        }
+        public void TestForResult() {
+            do {
+                if( ClientTask.IsCompleted ) {
+                    ClientTask.Result.Dispose() ;
+                    Main.IncreaseAttackCount() ;
+                    break ;
+                }
+                Thread.Sleep(1000) ;
+            } while( true ) ;
+            Accept() ;
         }
         
         
     }
-    
 }
+
+
