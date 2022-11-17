@@ -9,16 +9,12 @@ class ScanBubble {
 	string 	Host ;
 	int 	Start ;
 	int 	End ;
-	private ConcurrentBag<int> OpenPorts ;
-	public ConcurrentBag<int> ports {
-		get { return OpenPorts ; }
-	}
+	
 	
 	public ScanBubble (string host, int start, int end ) {
 		Host = host ;
 		Start = start ;
 		End = end ;
-		OpenPorts = new ConcurrentBag<int>() ;
 	}
 	
 	public async Task ScanRange() {
@@ -35,7 +31,7 @@ class ScanBubble {
 			return ;
 		}
 		if ( spider.Connected ) {
-			OpenPorts.Add( port ) ;
+			Console.WriteLine( port ) ;
 			spider.Dispose() ;
 		}
 		
@@ -45,22 +41,13 @@ class ScanBubble {
 
 class Start {
 	static ScanBubble bubble ;
-
-	static async Task RangeScan( ) {
-		await bubble.ScanRange() ;
-		ShowPorts() ;
-	}
-	static async Task ShowPorts() {
-		foreach ( int member in bubble.ports ) {
-			Console.WriteLine( member ) ;
-		}	
-	}
 	
 	public static void Main( string[] args ) {
 		string host = args[0] ;
 		int start 	= int.Parse( args[1] ) ;
 		int end 	= int.Parse( args[2] ) ;
 		bubble = new ScanBubble( host, start, end ) ;
-		RangeScan() ;
+		Console.WriteLine("open Ports at " + host) ;
+		bubble.ScanRange() ;
 	}
 }
