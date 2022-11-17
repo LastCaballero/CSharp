@@ -1,6 +1,5 @@
 using System ;
 using System.Net.Sockets ;
-using System.Collections.Concurrent ;
 using System.Threading.Tasks ;
 
 
@@ -17,7 +16,7 @@ class ScanBubble {
 		End = end ;
 	}
 	
-	public async Task ScanRange() {
+	public void ScanRange() {
 		for ( int i = Start ; i <= End ; i++ ) {
 			ScanPort ( i ) ;						
 		}
