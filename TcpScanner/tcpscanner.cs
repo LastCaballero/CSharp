@@ -28,10 +28,11 @@ class ScanBubble {
 		try {
 			spider.Connect( Host , port ) ;
 		} catch { 
+			Console.WriteLine( port + "\tclosed" ) ;
 			return ;
 		}
 		if ( spider.Connected ) {
-			Console.WriteLine( port ) ;
+			Console.WriteLine( port + "\topen" ) ;
 			spider.Dispose() ;
 		}
 		
@@ -47,7 +48,7 @@ class Start {
 		int start 	= int.Parse( args[1] ) ;
 		int end 	= int.Parse( args[2] ) ;
 		bubble = new ScanBubble( host, start, end ) ;
-		Console.WriteLine("open Ports at " + host) ;
+		Console.WriteLine("Ports at " + host) ;
 		bubble.ScanRange() ;
 	}
 }
