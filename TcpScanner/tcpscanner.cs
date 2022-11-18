@@ -10,8 +10,8 @@ class ScanBubble {
 	string 	Host ;
 	int 	Start ;
 	int 	End ;
-	public ConcurrentBag<int> open { get ; set ; }
-	public ConcurrentBag<int> closed { get ; set ; }
+	ConcurrentBag<int> open ;
+	ConcurrentBag<int> closed ;
 	
 	public ScanBubble (string host, int start, int end ) {
 		Host = host ;
@@ -52,10 +52,9 @@ class ScanBubble {
 			closed.Add( port  ) ;
 			return ;
 		}
-		if ( spider.Connected ) {
-			open.Add( port ) ;
-			spider.Dispose() ;
-		}
+		open.Add( port ) ;
+		spider.Dispose() ;
+		
 	} 
 }
 
