@@ -19,13 +19,7 @@ class ScanBubble {
 		End = end ;
 		open = new ConcurrentBag<int>() ;
 		closed = new ConcurrentBag<int>() ;
-		StartScanning() ;
-	}
-	async Task StartScanning() {
-		await ScanRange() ;
-		Thread.Sleep(3000) ;
-		ShowOpen() ;
-		ShowClosed() ;
+		ScanRange() ;
 	}
 	void ShowOpen() {
 		foreach( int p in open ) {
@@ -38,10 +32,15 @@ class ScanBubble {
 		}
 	}
 	
-	async Task ScanRange() {
-		for ( int i = Start ; i <= End ; i++ ) {
-			new Thread( () => ScanPort( i - 1 ) ).Start() ;
+	void ScanRange() {
+		int i = Start ;
+		while ( i <= End ) {
+			new Thread( () => ScanPort( i ) ).Start() ;
+			Interlocked.Increment( ref i ) ;
 		}
+		Thread.Sleep(3000) ;
+		ShowOpen() ;
+		ShowClosed() ;
 	}
 
 	public void ScanPort ( int port ) {
