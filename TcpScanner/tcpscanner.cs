@@ -40,7 +40,7 @@ class ScanBubble {
 	
 	async Task ScanRange() {
 		for ( int i = Start ; i <= End ; i++ ) {
-			new Thread( () => ScanPort(i) ).Start() ;
+			new Thread( () => ScanPort( i - 1 ) ).Start() ;
 		}
 	}
 
