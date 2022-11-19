@@ -14,9 +14,9 @@ namespace timesetter {
                 DateTime now = DateTime.Now ;
                 Main.Dispatcher.Invoke(
                     () => {
-                        Main.Hour.Content = now.Hour ;
-                        Main.Minute.Content = now.Minute ;
-                        Main.Second.Content = now.Second ;
+                        Main.Hour.Content = string.Format("{0,2}",now.Hour) ;
+                        Main.Minute.Content = string.Format("{0,2}",now.Minute) ;
+                        Main.Second.Content = string.Format("{0,2}",now.Second) ;
                     }
                 ) ;    
                 Thread.Sleep(1000) ;
