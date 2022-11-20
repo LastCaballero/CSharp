@@ -56,7 +56,7 @@ namespace wagecalculator
         object IMultiValueConverter.Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             return string.Format(
-                "{0,-20} {1,20:F2}","Wage per Month: ",
+                "{0,-20} {1,20:C}","Wage per Month: ",
                 (double)values[0] * (double)values[1]
             )  ;
         }
@@ -72,7 +72,7 @@ namespace wagecalculator
         object IMultiValueConverter.Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             return string.Format(
-                "{0,-20} {1,20:F2}","Wage per Year: ",
+                "{0,-20} {1,20:C}","Wage per Year: ",
                 (double)values[0] * (double)values[1] * 12
             )  ;
         }
