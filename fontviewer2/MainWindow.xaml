@@ -1,0 +1,62 @@
+﻿<Window x:Class="fontviewer.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:fontviewer" mc:Ignorable="d" Title="Font Viewer" MinWidth="750" MinHeight="550" Height="600" Width="800" Name="MainContainer">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="140"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBox Name="TextInput" Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" TextAlignment="Center"  MaxLines="1" FontSize="30" FontWeight="400">SomeText</TextBox>
+        <Grid Grid.Row="1" Grid.Column="0" Margin="25">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Grid.Column="0">
+                <Label HorizontalAlignment="Center" FontSize="20" FontWeight="200">Fontsize</Label>
+                <Slider Name="SizeSlider" IsSnapToTickEnabled="True" Margin="10"  Minimum="25" Maximum="70" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="1">
+            <Label HorizontalAlignment="Center" FontSize="20" FontWeight="200">Fontweight</Label>
+            <ComboBox Name="Boldness" SelectedIndex="4" Margin="10"  VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                <ComboBoxItem>100</ComboBoxItem>
+                <ComboBoxItem>200</ComboBoxItem>
+                <ComboBoxItem>300</ComboBoxItem>
+                <ComboBoxItem>400</ComboBoxItem>
+                <ComboBoxItem>500</ComboBoxItem>
+                <ComboBoxItem>600</ComboBoxItem>
+                <ComboBoxItem>700</ComboBoxItem>
+                <ComboBoxItem>800</ComboBoxItem>
+                <ComboBoxItem>900</ComboBoxItem>
+                <ComboBoxItem>950</ComboBoxItem>
+            </ComboBox>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="2">
+            <Label HorizontalAlignment="Center" FontSize="20" FontWeight="200">Font</Label>
+            <ComboBox Name="Family" SelectedIndex="0" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                <ComboBoxItem>Calibri</ComboBoxItem>
+            </ComboBox>
+            </StackPanel>
+            
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" FontStyle="Normal" FontSize="{Binding ElementName=SizeSlider, Path=Value}" FontWeight="{Binding ElementName=Boldness, Path=Text}" FontFamily="{Binding ElementName=Family, Path=Text}" Content="{Binding ElementName=TextInput, Path=Text}" />
+            <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontStyle="Italic" FontSize="{Binding ElementName=SizeSlider, Path=Value}" FontWeight="{Binding ElementName=Boldness, Path=Text}" FontFamily="{Binding ElementName=Family, Path=Text}" Content="{Binding ElementName=TextInput, Path=Text}" />
+            <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" FontStyle="Oblique" FontSize="{Binding ElementName=SizeSlider, Path=Value}" FontWeight="{Binding ElementName=Boldness, Path=Text}" FontFamily="{Binding ElementName=Family, Path=Text}" Content="{Binding ElementName=TextInput, Path=Text}" />
+        </Grid>
+    </Grid>
+</Window>
