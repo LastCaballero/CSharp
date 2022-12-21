@@ -38,7 +38,6 @@ namespace edifact
             string[] lines = EdiAsText.Split(SegmentSeparator) ;
             string[] part ;
             string[] data ;
-            string sign = "" ;
             for(int i = 1 ; i < lines.Length ; i++){
                 part = lines[i].Split(DataSegmentSeparator) ;
                 for(int ip = 0 ; ip < part.Length ; ip++){
