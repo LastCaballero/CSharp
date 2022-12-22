@@ -14,9 +14,25 @@ namespace edifact
 
         
         public Edifact(string filename){
-            FileStream filestream = new FileStream(filename, FileMode.Open) ;
-            StreamReader reader = new StreamReader( filestream ) ;
-            EdiAsText = reader.ReadToEnd() ;
+            
+            FileStream filestream ;
+            StreamReader reader ;
+            try
+            {
+                filestream = new FileStream(filename, FileMode.Open) ;
+                reader = new StreamReader( filestream ) ;
+                EdiAsText = reader.ReadToEnd() ;    
+            }
+            catch (System.Exception e)
+            {
+                EdiAsText = "" ;
+                Console.Error.WriteLine("Something went wrong");
+                Console.Error.WriteLine("The Problem is described below:\n");
+                Console.Error.WriteLine(e.Message) ;
+                return ;
+            }
+            
+
             if (UnaExists())
             {
                 SetSeparators();
