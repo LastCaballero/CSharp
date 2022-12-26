@@ -50,7 +50,7 @@ namespace energie
                 return "No Information available..." ;
         }
         void ShowScheme() {
-            Scheme.Content = GetActiveMode() ;
+            Dispatcher.InvokeAsync(() => Scheme.Content = GetActiveMode() ) ;
         }
     }
 }
