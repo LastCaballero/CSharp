@@ -82,10 +82,7 @@ namespace edifact
 
 		
 
-        public override string ToString()
-        {
-            return EdiAsNestedList.ToString();
-        }
+       
 
     }
 }
