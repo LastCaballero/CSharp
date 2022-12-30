@@ -24,7 +24,7 @@ namespace edifact
                 SetSeparators();
             }
             ConvertToNestedList();
-            GiveItOut() ;
+            GiveItOut();
         }
         void ReadEdi(string filename)
         {
@@ -65,24 +65,23 @@ namespace edifact
             );
         }
 
-		public void GiveItOut(){
-			EdiAsNestedList.GetRange(1,EdiAsNestedList.Count - 1).ForEach(
-				Line => {
-                    Console.WriteLine() ;
+        public void GiveItOut()
+        {
+            EdiAsNestedList.GetRange(1, EdiAsNestedList.Count - 1).ForEach(
+                Line =>
+                {
+                    Console.WriteLine();
                     Line.ForEach(
-                        Segment => {
+                        Segment =>
+                        {
                             Segment.ForEach(
-                                Data => { Console.Write(Data + "\t") ; }
-                            ) ;
+                                Data => { Console.Write(Data + "\t"); }
+                            );
                         }
-                    ) ;
-                } 
-			) ;
-		}
-
-		
-
-       
+                    );
+                }
+            );
+        }
 
     }
 }
