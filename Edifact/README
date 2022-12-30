@@ -1,1 +1,7 @@
 In this project you can see how parse and ouput a edifact.
+
+compile1 -> dotnet build
+compile2 -> dotnet publish
+
+run1 -> dotnet run edifact.edi
+run2 -> build.exe edifact.edi
