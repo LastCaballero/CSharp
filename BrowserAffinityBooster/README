@@ -1,1 +1,4 @@
-A program to set the ProcessAffiniy of Browsers
+A program to set the ProcessAffiniy of Browsers. After compilation with dotnet you can set the affiniy with
+
+  program.exe (1 + 2 + 4) to set the affinity to the first 3 processors.
+  If you want to calculate on your own you can also run it with program.exe 7...
